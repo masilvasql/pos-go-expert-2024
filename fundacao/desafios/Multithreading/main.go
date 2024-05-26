@@ -38,7 +38,7 @@ func main() {
 	go makeCepRequest(ctx, *requestViaCep, fastestApiURL)
 
 	select {
-	case <-time.After(time.Second * 1):
+	case <-time.After(time.Second):
 		log.Println("timeout exceeded")
 		cancel()
 	case result := <-fastestApiURL:
@@ -66,5 +66,5 @@ func makeCepRequest(ctx context.Context, requestInfo RequestInfo, fastestApiURL 
 	}
 
 	duration := time.Since(start).Milliseconds()
-	fastestApiURL <- fmt.Sprintf("The fastest api was %s.\nThe time spen was: %d miliseconds. the request body is\n%s", requestInfo.ApiName, duration, jsonResult)
+	fastestApiURL <- fmt.Sprintf("The fastest api was %s.\nThe spent time was: %d miliseconds. the request body is\n%s", requestInfo.ApiName, duration, jsonResult)
 }
