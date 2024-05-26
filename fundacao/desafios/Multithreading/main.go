@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
-	"os"
 	"time"
 )
 
@@ -37,9 +37,14 @@ func main() {
 	go makeCepRequest(ctx, *requestBrasilApi, fastestApiURL)
 	go makeCepRequest(ctx, *requestViaCep, fastestApiURL)
 
-	apiUrl := <-fastestApiURL
-	cancel()
-	fmt.Println(apiUrl)
+	select {
+	case <-time.After(time.Second * 1):
+		log.Println("timeout exceeded")
+		cancel()
+	case result := <-fastestApiURL:
+		fmt.Println(result)
+		cancel()
+	}
 
 }
 
@@ -47,17 +52,19 @@ func makeCepRequest(ctx context.Context, requestInfo RequestInfo, fastestApiURL 
 	start := time.Now()
 	req, err := http.NewRequestWithContext(ctx, "GET", requestInfo.ApiUrl, nil)
 	if err != nil {
-		fmt.Printf("Error to create request %v", err)
+		panic(err)
 	}
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		fmt.Printf("Error to make request %v", err)
+		panic(err)
+	}
+	defer resp.Body.Close()
+	jsonResult, err := io.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
 	}
 
-	defer resp.Body.Close()
-	io.Copy(os.Stdout, resp.Body)
-	fmt.Println()
 	duration := time.Since(start).Milliseconds()
-	fastestApiURL <- fmt.Sprintf("The fastest api was %s.\nThe time spen was: %d miliseconds", requestInfo.ApiName, duration)
+	fastestApiURL <- fmt.Sprintf("The fastest api was %s.\nThe time spen was: %d miliseconds. the request body is\n%s", requestInfo.ApiName, duration, jsonResult)
 }
