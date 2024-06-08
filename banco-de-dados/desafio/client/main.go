@@ -38,7 +38,6 @@ func main() {
 			fmt.Println("Error to write in file", err)
 		}
 	}
-
 }
 
 func writeFile(dados DadosCotacao) error {

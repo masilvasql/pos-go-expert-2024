@@ -39,27 +39,26 @@ type DadosCotacaoOutput struct {
 	Cotacao string `json:"cotacao"`
 }
 
-var db *gorm.DB
-
 func main() {
 
 	http.HandleFunc("/cotacao", handleGetCotacao)
 	fmt.Println("SERVER IS RUNING")
-	setupDb()
+	// setupDb()
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		panic(err)
 	}
 
 }
 
-func setupDb() {
+func setupDb() *gorm.DB {
 	var err error
-	db, err = gorm.Open(sqlite.Open("cotacao_db.db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("cotacao.db"), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println("DB is confifured")
 	db.AutoMigrate(&DadosCotacao{})
+	return db
 }
 
 func handleGetCotacao(w http.ResponseWriter, r *http.Request) {
@@ -137,15 +136,18 @@ func makeRequest(ctx context.Context, url string, chCotacao chan Cotacao) error 
 }
 
 func insertDataOnDataBase(cotacao *Cotacao) {
+	db := setupDb()
 	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Millisecond)
 	defer cancel()
 
 	done := make(chan bool)
 
 	go func() {
-		dadosCotacao := &DadosCotacao{
+		dadosCotacao := DadosCotacao{
 			Bid: cotacao.Usdbrl.Bid,
 		}
+
+		fmt.Println(dadosCotacao)
 
 		if err := db.WithContext(ctx).Create(&dadosCotacao).Error; err != nil {
 			log.Printf("Error inserting data: %v", err)
