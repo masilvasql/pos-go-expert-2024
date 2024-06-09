@@ -1,6 +1,7 @@
 {
     "conventionalCommits.scopes": [
         "desafio1",
-        "Testing"
+        "Testing",
+        "APIs"
     ]
 }
