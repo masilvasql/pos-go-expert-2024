@@ -20,17 +20,17 @@ func TestProductWhenNameIsRequired(t *testing.T) {
 	product, err := NewProduct("", 2000)
 	assert.Nil(t, product)
 	assert.NotNil(t, err)
-	assert.EqualError(t, err, "Name is required")
+	assert.EqualError(t, err, "name is required")
 }
 
 func TestProductWhenPriceIsRequired(t *testing.T) {
 	_, err := NewProduct("Produto", 0)
-	assert.EqualError(t, err, "Price is required")
+	assert.EqualError(t, err, "price is required")
 }
 
 func TestProductWhenPriceIsInvalid(t *testing.T) {
 	_, err := NewProduct("Produto", -10)
-	assert.EqualError(t, err, "Invalid Price")
+	assert.EqualError(t, err, "invalid Price")
 }
 
 func TestProductValidate(t *testing.T) {
