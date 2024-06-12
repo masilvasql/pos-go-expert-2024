@@ -2,12 +2,13 @@ package database
 
 import (
 	"fmt"
+	"math/rand"
+	"testing"
+
 	"github.com/masilvasql/pos-go-expert-2024/APIs/internal/entity"
 	"github.com/stretchr/testify/assert"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"math/rand"
-	"testing"
 )
 
 func TestProduct_Create(t *testing.T) {
