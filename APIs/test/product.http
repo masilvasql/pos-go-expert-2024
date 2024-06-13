@@ -7,14 +7,31 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8000/products/da0e3d51-d810-4654-a3ad-c750dc719092
+GET http://localhost:8000/products/a905ae6b-e595-480c-b8db-4972527f9d67
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTgzMjI1NTAsInN1YiI6IjA5MjJjMDA5LTExZWQtNDVhMS05NWNhLThhMDk4YTI2NjNjYSJ9.0zDPSeduuHLbPZ_-bizs93S76hmO7-iK-c4DNrOszEU
 
 ###
-PUT  http://localhost:8000/products/da0e3d51-d810-4654-a3ad-c750dc719092
+
+GET http://localhost:8000/products?page=1&limit=1&sort=asc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTgzMjI1NTAsInN1YiI6IjA5MjJjMDA5LTExZWQtNDVhMS05NWNhLThhMDk4YTI2NjNjYSJ9.0zDPSeduuHLbPZ_-bizs93S76hmO7-iK-c4DNrOszEU
+
+
+###
+PUT  http://localhost:8000/products/a905ae6b-e595-480c-b8db-4972527f9d67
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTgzMjI1NTAsInN1YiI6IjA5MjJjMDA5LTExZWQtNDVhMS05NWNhLThhMDk4YTI2NjNjYSJ9.0zDPSeduuHLbPZ_-bizs93S76hmO7-iK-c4DNrOszEU
+
 
 {
   "name": "My Product Updated",
   "price": 300
 }
+
+###
+
+DELETE http://localhost:8000/products/a905ae6b-e595-480c-b8db-4972527f9d67
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTgzMjI1NTAsInN1YiI6IjA5MjJjMDA5LTExZWQtNDVhMS05NWNhLThhMDk4YTI2NjNjYSJ9.0zDPSeduuHLbPZ_-bizs93S76hmO7-iK-c4DNrOszEU
+
+

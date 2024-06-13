@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/jwtauth"
 	"github.com/masilvasql/pos-go-expert-2024/APIs/configs"
 	"github.com/masilvasql/pos-go-expert-2024/APIs/internal/entity"
 	"github.com/masilvasql/pos-go-expert-2024/APIs/internal/infra/database"
@@ -21,7 +22,7 @@ func main() {
 		panic(err)
 	}
 	pathEnv := fmt.Sprintf("%s\\.env", dir)
-	_, err = configs.LoadConfig(pathEnv)
+	config, err := configs.LoadConfig(pathEnv)
 
 	if err != nil {
 		panic(err)
@@ -40,11 +41,24 @@ func main() {
 	productDB := database.NewProduct(db)
 	productHandler := handlers.NewProductHandler(productDB)
 
+	userDB := database.NewUser(db)
+	userHandler := handlers.NewUserHandler(userDB, config.TokenAuth, config.JWTExpiresIn)
+
 	router := chi.NewRouter()
 	router.Use(middleware.Logger)
-	router.Post("/products", productHandler.CreateProduct)
-	router.Get("/products/{id}", productHandler.GetProduct)
-	router.Put("/products/{id}", productHandler.UpdateProduct)
+
+	router.Route("/products", func(r chi.Router) {
+		r.Use(jwtauth.Verifier(config.TokenAuth))
+		r.Use(jwtauth.Authenticator)
+		r.Post("/", productHandler.CreateProduct)
+		r.Get("/", productHandler.GetProducts)
+		r.Get("/{id}", productHandler.GetProduct)
+		r.Put("/{id}", productHandler.UpdateProduct)
+		r.Delete("/{id}", productHandler.DeleteProduct)
+	})
+
+	router.Post("/users", userHandler.CreateUser)
+	router.Post("/users/generate-token", userHandler.GetJWT)
 
 	http.ListenAndServe(":8000", router)
 
