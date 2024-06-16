@@ -1,5 +1,6 @@
 POST http://localhost:8000/products
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTgzNjYwMzksInN1YiI6IjA5MjJjMDA5LTExZWQtNDVhMS05NWNhLThhMDk4YTI2NjNjYSJ9.gl0C9vrfe2OMGAkYgfbzXKTfEFxenAf3s0WfjtWYqb0
 
 {
   "name": "Product 2",
@@ -9,18 +10,18 @@ Content-Type: application/json
 ###
 GET http://localhost:8000/products/a905ae6b-e595-480c-b8db-4972527f9d67
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTgzMjI1NTAsInN1YiI6IjA5MjJjMDA5LTExZWQtNDVhMS05NWNhLThhMDk4YTI2NjNjYSJ9.0zDPSeduuHLbPZ_-bizs93S76hmO7-iK-c4DNrOszEU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTgzNjYwMzksInN1YiI6IjA5MjJjMDA5LTExZWQtNDVhMS05NWNhLThhMDk4YTI2NjNjYSJ9.gl0C9vrfe2OMGAkYgfbzXKTfEFxenAf3s0WfjtWYqb0
 
 ###
 
-GET http://localhost:8000/products?page=1&limit=1&sort=asc
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTgzMjI1NTAsInN1YiI6IjA5MjJjMDA5LTExZWQtNDVhMS05NWNhLThhMDk4YTI2NjNjYSJ9.0zDPSeduuHLbPZ_-bizs93S76hmO7-iK-c4DNrOszEU
+GET http://localhost:8000/products?page=2&limit=5&sort=asc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTgzNjYwMzksInN1YiI6IjA5MjJjMDA5LTExZWQtNDVhMS05NWNhLThhMDk4YTI2NjNjYSJ9.gl0C9vrfe2OMGAkYgfbzXKTfEFxenAf3s0WfjtWYqb0
 
 
 ###
 PUT  http://localhost:8000/products/a905ae6b-e595-480c-b8db-4972527f9d67
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTgzMjI1NTAsInN1YiI6IjA5MjJjMDA5LTExZWQtNDVhMS05NWNhLThhMDk4YTI2NjNjYSJ9.0zDPSeduuHLbPZ_-bizs93S76hmO7-iK-c4DNrOszEU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTgzNjYwMzksInN1YiI6IjA5MjJjMDA5LTExZWQtNDVhMS05NWNhLThhMDk4YTI2NjNjYSJ9.gl0C9vrfe2OMGAkYgfbzXKTfEFxenAf3s0WfjtWYqb0
 
 
 {
