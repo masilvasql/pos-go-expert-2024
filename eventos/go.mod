@@ -1,4 +1,4 @@
-module github.com/masilvasql/events
+module github.com/masilvasql/eventos
 
 go 1.22.3
 
