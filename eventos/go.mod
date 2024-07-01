@@ -1,4 +1,4 @@
-module github.com/masilvasql/eventos
+module github.com/masilvasql/pos-go-expert-2024/eventos
 
 go 1.22.3
 
