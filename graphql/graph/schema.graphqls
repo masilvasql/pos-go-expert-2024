@@ -26,7 +26,7 @@ input NewCourse{
 type Query{
   categories: [Category!]!
   courses: [Course!]!
-  # category(id: ID!): Category
+  category(id: ID!): Category
   # course(id: ID!): Course
 }
 
