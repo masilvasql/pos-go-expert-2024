@@ -9,8 +9,6 @@ services:
       MYSQL_PASSWORD: root
     ports:
       - 3306:3306
-    volumes:
-      - .docker/mysql:/var/lib/mysql
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -32,8 +30,21 @@ services:
       - ${WEB_SERVER_PORT}:${WEB_SERVER_PORT}
       - ${GRPC_SERVER_PORT}:${GRPC_SERVER_PORT}
       - ${GRAPHQL_SERVER_PORT}:${GRAPHQL_SERVER_PORT}
+    environment:
+      DB_DRIVER: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: orders
+      WEB_SERVER_PORT: ${WEB_SERVER_PORT}
+      GRPC_SERVER_PORT: ${GRPC_SERVER_PORT}
+      GRAPHQL_SERVER_PORT: ${GRAPHQL_SERVER_PORT}
     depends_on:
       - mysql
       - rabbitmq
-    env_file:
-      - .env
+    
+
+
+
+

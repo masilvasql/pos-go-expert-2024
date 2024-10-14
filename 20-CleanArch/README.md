@@ -56,3 +56,22 @@ _______
 ### Para o GRPC acessar a url: http://localhost:50051
 
 Para testar a criação e listagem, pode ser utilizado o evans como cliente GRPC.
+* comando para acessar o evans: 
+```bash
+evans --proto internal/infra/grpc/protofiles/order.proto  --host localhost --port 50051 repl
+```
+
+* para listar os serviços:
+```bash
+show service
+```
+
+Chamar o serviço de listar as orders:
+```bash
+call ListOrder
+```
+
+Chamar o serviço de criar uma order:
+```bash
+call CreateOrder
+```
